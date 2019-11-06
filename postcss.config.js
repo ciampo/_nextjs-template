@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 module.exports = {
   plugins: [
     require('stylelint'),
@@ -5,7 +7,7 @@ module.exports = {
     require('tailwindcss'),
     require('@fullhuman/postcss-purgecss')({
       content: ['./pages/**/*.{js,tsx}', './components/**/*.{js,tsx}'],
-      defaultExtractor: content => content.match(/[\w-:/]+(?<!:)/g) || [],
+      defaultExtractor: (content) => content.match(/[\w-:/]+(?<!:)/g) || [],
     }),
     require('autoprefixer'),
     require('cssnano'),

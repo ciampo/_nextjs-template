@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-export default () => {
+const About = () => {
   const [name, setName] = useState('Example');
 
   function aboutName(name: string): string {
@@ -9,3 +9,5 @@ export default () => {
 
   return <div>{aboutName(name)}</div>;
 };
+
+export default About;
