@@ -7,5 +7,7 @@ This is a template for a next.js project using:
 - typescript
 - bundle analyzer
 - preact
-- stylelint
 - tailwind (+ autoprefixer, cssnano, purgecss)
+- lint styles via stylelint (integrated in next.js build)
+- lint scripts via eslint / prettier / tsc (integrated in next.js build)
+- commit hooks
