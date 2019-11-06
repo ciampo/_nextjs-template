@@ -12,25 +12,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.hero {
-  width: 100%;
-  color: #333;
-}
-.title {
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, Helvetica, sans-serif;
   margin: 0;
-  width: 100%;
-  padding-top: 80px;
-  line-height: 1.15;
-  font-size: 48px;
-}
-.title,
-.description {
-  text-align: center;
-}
-.row {
-  max-width: 880px;
-  margin: 80px auto 40px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
 }
