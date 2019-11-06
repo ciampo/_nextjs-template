@@ -6,7 +6,7 @@
     "analyze": "ANALYZE=true next build",
     "dev": "node server.js",
     "build": "next build",
-    "test": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet",
+    "test": "stylelint '**/*.css' && tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet",
     "test:fix": "yarn test --fix",
     "export": "next export",
     "static": "yarn build && yarn next export",
