@@ -15,7 +15,7 @@ const links: NavLink[] = [
   return link;
 });
 
-const Nav = () => (
+const Nav = (): JSX.Element => (
   <nav className="text-center">
     <ul className="flex justify-between py-1 px-4">
       <li className="flex py-1 px-2">
