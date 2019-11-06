@@ -6,10 +6,16 @@
     "analyze": "ANALYZE=true next build",
     "dev": "node server.js",
     "build": "next build",
-    "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+    "test": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet",
+    "test:fix": "yarn test --fix",
     "export": "next export",
     "static": "yarn build && yarn next export",
     "start": "NODE_ENV=production node server.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test"
+    }
   },
   "dependencies": {
     "preact": "^10.0.4"
@@ -30,6 +36,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.2.0",
+    "husky": "^3.0.9",
     "module-alias": "^2.2.2",
     "next": "^9.1.2",
     "postcss-easy-import": "^3.0.0",
