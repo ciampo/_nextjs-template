@@ -15,6 +15,11 @@
     "static": "yarn build && yarn next export",
     "start": "NODE_ENV=production node server.js"
   },
+  "browserslist": [
+    "last 2 versions",
+    "ie > 10",
+    "not dead"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "yarn test"
