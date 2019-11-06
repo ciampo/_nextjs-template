@@ -1,0 +1,36 @@
+@import './test.css';
+
+:root {
+  --color-primary: theme('colors.blue.500');
+  --color-secondary: theme('colors.red.500');
+  /* ... */
+}
+
+/* purgecss start ignore */
+@tailwind base;
+/* purgecss end ignore */
+@tailwind components;
+@tailwind utilities;
+
+.hero {
+  width: 100%;
+  color: #333;
+}
+.title {
+  margin: 0;
+  width: 100%;
+  padding-top: 80px;
+  line-height: 1.15;
+  font-size: 48px;
+}
+.title,
+.description {
+  text-align: center;
+}
+.row {
+  max-width: 880px;
+  margin: 80px auto 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
