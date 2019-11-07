@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "main": "pages/index.js",
   "author": "Marco Ciampini",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/ciampo/_nextjs-template.git"
+  },
   "license": "MIT",
   "private": true,
   "scripts": {
