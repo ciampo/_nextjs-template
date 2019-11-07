@@ -9,7 +9,7 @@
     "analyze": "ANALYZE=true next build",
     "dev": "node server.js",
     "build": "next build",
-    "test": "stylelint '**/*.css' && tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet",
+    "test": "stylelint '**/*.css' && tsc --noEmit && eslint '*/**/*.{js,ts,tsx}'",
     "test:fix": "yarn test --fix",
     "export": "next export",
     "static": "yarn build && yarn next export",
@@ -22,12 +22,22 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "yarn test",
+      "pre-commit": "lint-staged",
       "post-checkout": "if [[ $HUSKY_GIT_PARAMS =~ 1$ ]]; then yarn install --frozen-lockfile; fi",
       "post-merge": "yarn install --frozen-lockfile",
       "post-rebase": "yarn install",
       "pre-push": "yarn test"
     }
+  },
+  "lint-staged": {
+    "*.{js|ts|tsx}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.css": [
+      "stylelint",
+      "git add"
+    ]
   },
   "dependencies": {
     "preact": "^10.0.4"
@@ -50,6 +60,7 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.2.0",
     "husky": "^3.0.9",
+    "lint-staged": "^10.0.0-1",
     "module-alias": "^2.2.2",
     "next": "^9.1.2",
     "postcss-easy-import": "^3.0.0",
