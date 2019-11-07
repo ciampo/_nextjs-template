@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import { motion } from 'framer-motion';
 
+// Inspired from
+// https://reacttricks.com/animating-next-page-transitions-with-framer-motion/
+// and https://github.com/kheruc/rt-next-motion
 const easing = [0.175, 0.85, 0.42, 0.96];
 
 const fadeInTransitionUp = {
