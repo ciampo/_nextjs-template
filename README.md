@@ -10,4 +10,5 @@ This is a template for a next.js project using:
 - tailwind (+ autoprefixer, cssnano, purgecss)
 - lint styles via stylelint (integrated in next.js build)
 - lint scripts via eslint / prettier / tsc (integrated in next.js build)
-- commit hooks
+- git hooks (including pre-{commit, push} linting)
+- page transitions (achieved through framer-motion)
