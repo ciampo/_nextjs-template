@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 
+import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/default';
+
 const About: React.FC<{}> = () => {
   const [name] = useState('Example');
 
@@ -14,7 +16,9 @@ const About: React.FC<{}> = () => {
         <title>{aboutName(name)}</title>
       </Head>
 
-      <div>{aboutName(name)}</div>
+      <DefaultPageTransitionWrapper>
+        <div>{aboutName(name)}</div>
+      </DefaultPageTransitionWrapper>
     </>
   );
 };
