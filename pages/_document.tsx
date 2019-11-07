@@ -21,7 +21,9 @@ class CustomDocument extends Document {
     return (
       <Html>
         <Head>
-          <script>{`document.documentElement.classList.add('js-app')`}</script>
+          <script
+            dangerouslySetInnerHTML={{ __html: `document.documentElement.classList.add('js-app')` }}
+          ></script>
         </Head>
         <body>
           <Main />
