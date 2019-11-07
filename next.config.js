@@ -7,10 +7,16 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 const nextConfig = {
   exportPathMap() {
-    return {
+    const pages = {
       '/': { page: '/' },
       '/about': { page: '/about' },
     };
+
+    ['test-a', 'test-b'].forEach((postId) => {
+      pages[`/post/${postId}`] = { page: '/post/[id]', query: { id: postId } };
+    });
+
+    return pages;
   },
   webpack(config, options) {
     // From preact example
