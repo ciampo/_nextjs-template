@@ -2,15 +2,11 @@
 
 const fs = require('fs');
 
+// Can't had tailored caching stategies because of https://github.com/zeit/next.js/issues/6303
+
+// TODO: add CSP
 const headerContent = `
-/*.js
-  Cache-Control: no-cache, no-store, must-revalidate
-
-/*.css
-  Cache-Control: no-cache, no-store, must-revalidate
-
 /*
-  Cache-Control: no-cache, no-store, must-revalidate
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
