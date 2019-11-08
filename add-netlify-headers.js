@@ -3,16 +3,15 @@
 const fs = require('fs');
 
 const headerContent = `
-
 /*
   Cache-Control: no-cache, no-store, must-revalidate
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
 
-*.js
+/**/*.js
   Cache-Control: no-cache, no-store, must-revalidate
 
-*.css
+/**/*.css
   Cache-Control: no-cache, no-store, must-revalidate
 `;
 
