@@ -3,6 +3,7 @@
 const fs = require('fs');
 
 const headerContent = `/*
+  Cache-Control: public, max-age=60
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block`;
 
