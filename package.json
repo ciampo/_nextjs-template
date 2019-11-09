@@ -15,9 +15,9 @@
     "build": "next build",
     "test": "stylelint '**/*.css' && tsc --noEmit && eslint '*/**/*.{js,ts,tsx}'",
     "test:fix": "yarn test --fix",
-    "export": "next export",
     "static": "rm -rf .next/ out/ && yarn build && yarn next export && node ./add-netlify-headers.js",
-    "start": "NODE_ENV=production node server.js"
+    "serve:static": "yarn netlify dev --dir out",
+    "serve:ssr": "NODE_ENV=production node server.js"
   },
   "browserslist": [
     "last 2 versions",
@@ -68,6 +68,7 @@
     "husky": "^3.0.9",
     "lint-staged": "^10.0.0-1",
     "module-alias": "^2.2.2",
+    "netlify-cli": "^2.20.2",
     "postcss-easy-import": "^3.0.0",
     "postcss-reporter": "^6.0.1",
     "preact-render-to-string": "^5.1.1",
