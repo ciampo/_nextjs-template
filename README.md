@@ -13,6 +13,8 @@ This is a template for a next.js project using:
 - git hooks (including pre-{commit, push} linting)
 - page transitions (achieved through framer-motion)
 - get contentful data
+- use .env in code
+- ie11 support w/ polyfills
 
 ## Main scripts
 
