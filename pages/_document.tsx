@@ -24,6 +24,12 @@ class CustomDocument extends Document {
           <script
             dangerouslySetInnerHTML={{ __html: `document.documentElement.classList.add('js-app')` }}
           ></script>
+
+          <link
+            rel="preconnect dns-prefetch"
+            href="https://www.google-analytics.com"
+            crossOrigin="anonymous"
+          />
         </Head>
         <body>
           <Main />
