@@ -47,9 +47,8 @@ async function getEntries(type) {
 
 const pullContentfulData = async () => {
   await cleanDataFolder();
-  // await getcontent();
-  await getEntries('project');
   await getEntries('about');
+  await getEntries('globalMeta');
 };
 
 pullContentfulData();
