@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactGA from 'react-ga';
 import Router from 'next/router';
 
@@ -10,7 +10,7 @@ const pageView = (): void => {
 };
 
 const Analytics: React.FC<{}> = (): null => {
-  React.useEffect(() => {
+  useEffect(() => {
     // Init GA the first time.
     if (!window.IS_GA_INIT && process.env.GA) {
       ReactGA.initialize(process.env.GA);
