@@ -71,8 +71,7 @@ Lints scripts and styles, and tries to auto-fix any errors.
 
 ## Coming Soon ⌛️
 
-- move configuration to a file? associate route with JSON data and page file
-  - use it in sitemap / robots
+Caught up!
 
 ## Nice to have 💭
 
