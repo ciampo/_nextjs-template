@@ -39,7 +39,7 @@ class CustomDocument extends Document<DocumentProps & CustomDocumentProps> {
       ? `https:${this.props.previewSharingImage}`
       : this.props.previewSharingImage;
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           <meta name="twitter:card" content="summary" />
           <meta property="og:type" content="website" />
