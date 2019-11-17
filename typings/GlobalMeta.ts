@@ -1,5 +1,5 @@
 import { ContentfulMedia } from './contentful';
 
-export type GlobalMetaAPIs = {
+export type ContentfulApiGlobalMeta = {
   previewImage: ContentfulMedia;
 };

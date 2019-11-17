@@ -9,7 +9,7 @@ import Document, {
   DocumentProps,
 } from 'next/document';
 
-import { GlobalMetaAPIs } from '../typings';
+import { ContentfulApiGlobalMeta } from '../typings';
 
 type CustomDocumentProps = {
   previewSharingImage: string;
@@ -24,7 +24,7 @@ class CustomDocument extends Document<DocumentProps & CustomDocumentProps> {
   ): Promise<DocumentInitialProps & CustomDocumentProps> {
     const initialProps = await Document.getInitialProps(ctx);
 
-    const globalMeta: GlobalMetaAPIs[] = await import('../data/globalMeta.json').then(
+    const globalMeta: ContentfulApiGlobalMeta[] = await import('../data/globalMeta.json').then(
       (m) => m.default
     );
 
