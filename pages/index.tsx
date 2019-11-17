@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 
-import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/default';
+import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/Default';
 import PageMeta from '../components/PageMeta';
 
 const PostLink: React.FC<{ id: string; label: string }> = ({ id, label }) => (

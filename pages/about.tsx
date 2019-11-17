@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { NextComponentType } from 'next';
 
-import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/default';
+import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/Default';
 import PageMeta from '../components/PageMeta';
 
 type AboutPageProps = {

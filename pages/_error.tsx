@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { NextComponentType, NextPageContext } from 'next';
 
 import PageMeta from '../components/PageMeta';
-import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/default';
+import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/Default';
 
 type ErrorPageProps = {
   statusCode: number;

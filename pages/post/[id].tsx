@@ -3,7 +3,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 
 import PageMeta from '../../components/PageMeta';
-import DefaultPageTransitionWrapper from '../../components/page-transition-wrappers/default';
+import DefaultPageTransitionWrapper from '../../components/page-transition-wrappers/Default';
 
 const Post: React.FC<{}> = () => {
   const router = useRouter();

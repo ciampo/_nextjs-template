@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 
-import { joinUrl } from './utils';
+import { joinUrl } from './utils/utils';
 
 interface PageMetaProps {
   title: string;

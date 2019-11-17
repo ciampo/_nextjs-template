@@ -60,6 +60,7 @@ Lints scripts and styles, and tries to auto-fix any errors.
 
 ## Coming Soon
 
+- move configuration to a file? associate route with JSON data and page file
 - use contentful content (e.g. pages)
 - add contentful example models
 - alternative layouts (other than MainLayout)

@@ -4,8 +4,8 @@ import React from 'react';
 import App from 'next/app';
 import { AnimatePresence } from 'framer-motion';
 
-import MainLayout from '../components/layouts/main';
-import Analytics from '../components/Analytics';
+import MainLayout from '../components/layouts/Main';
+import Analytics from '../components/utils/Analytics';
 
 export default class MyApp extends App {
   render(): JSX.Element {
