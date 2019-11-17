@@ -12,8 +12,9 @@
   "scripts": {
     "analyze": "ANALYZE=true next build",
     "data": "node scripts/get-contentful-content.js",
-    "dev": "node server.js",
-    "build": "next build",
+    "dev": "yarn generate:seo && node server.js",
+    "build": "yarn generate:seo && next build",
+    "generate:seo": "node scripts/create-robots.js && node scripts/create-sitemap.js",
     "test": "stylelint '**/*.css' && tsc --noEmit && eslint '*/**/*.{js,ts,tsx}'",
     "test:fix": "yarn test --fix",
     "static": "rm -rf .next/ out/ && yarn data && yarn build && yarn next export && node ./scripts/add-netlify-headers.js",
