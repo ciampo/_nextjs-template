@@ -1,33 +1,35 @@
-# _nextjs-template
+# Netx.js Template Project
 
-This is a template for a next.js project using:
+This is a template for a next.js project. Features:
 
-- next.js
-- yarn
+- `Next.js`
+- `yarn`
 - typescript
-- bundle analyzer
-- preact
-- tailwind (+ autoprefixer, cssnano, purgecss)
-- lint styles via stylelint (integrated in next.js build)
-- lint scripts via eslint / prettier / tsc (integrated in next.js build)
-- git hooks (including pre-{commit, push} linting)
-- page transitions (achieved through framer-motion)
-- get contentful data (with sample typings)
-- use .env in code
+- bundle analyzer used to help debugging code splitting modules
+- `preact` used instead of `react` for smaller bundles
+- styles written in CSS. Using `tailwind` (+ `autoprefixer`, `cssnano`, `purgecss`)
+- styles linted by `stylelint`
+- scripts linted by `eslint` / `prettier` / `tsc`
+- git `hooks` (including pre-{commit, push} linting)
+- page transitions (using `framer-motion`)
+- get `contentful` data script (with sample typings)
+- project wise variables stored in `.env`
 - ie11 support w/ polyfills
-- google analytics support
-- comprehensive meta tags, favicons, webmanifest, preview sharing image
-- sitemap.xml
-- robots.txt
-- enhanced security HTTP headers (including CSP)
+- google analytics
+- seo: comprehensive meta tags, favicons, webmanifest, preview sharing image, sitemap.xml,  robots.txt
+- enhanced security `HTTP` headers (including CSP)
+- app structure (w header nav, footer, main and alternative page layout)
 
-## Instructions
+## Setup 📝
 
+- install `node` glolbally
+- install `yarn` glolbally
 - set up Contentful, Netlify and Google Analytics
 - copy `.env.example` and rename it to `env`. Add the correct values for the env variables.
 - add the same env variables to Netlify
+- `yarn install`
 
-## Main scripts
+## Main scripts ⚙️
 
 ### `yarn dev`
 
@@ -45,7 +47,7 @@ Builds the app in production mode and exports it as static site ready to be host
 
 Serves the static site. The application should be compiled with `yarn static` first.
 
-## Other scripts
+## Other scripts 🛠
 
 ### `yarn build`
 
@@ -67,14 +69,17 @@ Lints scripts and styles.
 
 Lints scripts and styles, and tries to auto-fix any errors.
 
-## Coming Soon
+## Coming Soon ⌛️
 
 - move configuration to a file? associate route with JSON data and page file
   - use it in sitemap / robots
   - use it in next config
   - use it in each page, in order to get the right JSON data / canonical path
-- alternative layouts (other than MainLayout)
 
-## Nice to have
+## Nice to have 💭
 
 - inline critical styles. It's not supported out of the box, but there may be a few inspirational examples (like [this one](https://github.com/zeit/next.js/pull/3451)). Also, follow [this GH issue](https://github.com/GoogleChromeLabs/critters/issues/44).
+
+## Contributors
+
+- [Marco Ciampini](https://github.com/ciampo)
