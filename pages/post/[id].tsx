@@ -25,8 +25,8 @@ const Post: NextComponentType<{}, PagePostProps, PagePostProps> = ({ title, path
 
 Post.getInitialProps = async ({ pathname, query }: NextPageContext): Promise<PagePostProps> => {
   const toReturn = {
-    title: 'n/a',
-    path: '/na',
+    title: 'Post',
+    path: pathname,
   };
 
   const routeConfig = routesConfig.find(({ route }) => route === pathname);

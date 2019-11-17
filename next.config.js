@@ -47,8 +47,6 @@ const nextConfig = {
       }
     }
 
-    console.log(pathMap);
-
     return pathMap;
   },
   webpack(config, options) {

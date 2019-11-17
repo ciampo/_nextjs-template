@@ -37,7 +37,7 @@ const About: NextComponentType<{}, PageAboutProps, PageAboutProps> = ({ title, p
 
 About.getInitialProps = async ({ pathname }: NextPageContext): Promise<PageAboutProps> => {
   const toReturn = {
-    title: 'n/a',
+    title: 'About',
     path: '/na',
   };
 
