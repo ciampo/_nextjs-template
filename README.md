@@ -73,8 +73,6 @@ Lints scripts and styles, and tries to auto-fix any errors.
 
 - move configuration to a file? associate route with JSON data and page file
   - use it in sitemap / robots
-  - use it in next config
-  - use it in each page, in order to get the right JSON data / canonical path
 
 ## Nice to have 💭
 

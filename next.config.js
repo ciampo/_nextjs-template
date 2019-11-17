@@ -1,23 +1,55 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
+const fs = require('fs');
 const withCSS = require('@zeit/next-css');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 const Dotenv = require('dotenv-webpack');
 
+const routesConfig = require('./routes-config.js');
+
+const ROOT_FOLDER = process.cwd();
+const DATA_FOLDER = path.join(ROOT_FOLDER, 'data');
+
 const nextConfig = {
   exportPathMap() {
-    const pages = {
-      '/': { page: '/' },
-      '/about': { page: '/about' },
-    };
+    const pathMap = {};
 
-    ['test-a', 'test-b'].forEach((postId) => {
-      pages[`/post/${postId}`] = { page: '/post/[id]', query: { id: postId } };
-    });
+    for (const { route, contentfulTypeId, params } of routesConfig) {
+      if (contentfulTypeId) {
+        // Contentful based routes.
+        const data = JSON.parse(
+          fs.readFileSync(path.join(DATA_FOLDER, `${contentfulTypeId}.json`), {
+            encoding: 'utf8',
+          })
+        );
 
-    return pages;
+        for (const dataItem of data) {
+          let itemRoute = route;
+          const queryParams = {};
+
+          // If params is not specified, the route is supposes to be a "singleton"
+          // and only the last dataItem will be used as the resolvedData.
+          if (params) {
+            for (const [pattern, replacerFn] of Object.entries(params)) {
+              const replacementValue = replacerFn(dataItem);
+              itemRoute = itemRoute.replace(`[${pattern}]`, replacementValue);
+              queryParams[pattern] = replacementValue;
+            }
+          }
+
+          pathMap[itemRoute] = { page: route, query: queryParams };
+        }
+      } else {
+        // All routes that have a 1:1 relation between route and page.
+        pathMap[route] = { page: route };
+      }
+    }
+
+    console.log(pathMap);
+
+    return pathMap;
   },
   webpack(config, options) {
     // From preact netx.js example

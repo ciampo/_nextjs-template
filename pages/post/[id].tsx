@@ -1,33 +1,68 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import { NextComponentType } from 'next';
-import { usePrevious } from 'react-use';
+import PropTypes from 'prop-types';
+import { NextComponentType, NextPageContext } from 'next';
 
 import PageMeta from '../../components/PageMeta';
 import DefaultPageTransitionWrapper from '../../components/page-transition-wrappers/Default';
+import { ContentfulApiProject } from '../../typings';
+import routesConfig from '../../routes-config';
 
-const Post: NextComponentType<{}, {}, {}> = () => {
-  const router = useRouter();
-  const prevRouter = usePrevious(router);
+type PagePostProps = {
+  title: string;
+  path: string;
+};
 
-  // When the page is transitioning out, the router will have the value for the new page.
-  // This allows to use the correct value for this page
-  const correctRouter = prevRouter && router.route !== '/post/[id]' ? prevRouter : router;
+const Post: NextComponentType<{}, PagePostProps, PagePostProps> = ({ title, path }) => (
+  <>
+    <PageMeta title={title} description="A blog post" path={path} />
 
-  return (
-    <>
-      <PageMeta
-        title={`Post ${correctRouter.query.id}`}
-        description="A blog post"
-        path={correctRouter.asPath}
-      />
+    <DefaultPageTransitionWrapper>
+      <h1>{title}</h1>
+      <p>This is the blog post content.</p>
+    </DefaultPageTransitionWrapper>
+  </>
+);
 
-      <DefaultPageTransitionWrapper>
-        <h1>{correctRouter.query.id}</h1>
-        <p>This is the blog post content.</p>
-      </DefaultPageTransitionWrapper>
-    </>
-  );
+Post.getInitialProps = async ({ pathname, query }: NextPageContext): Promise<PagePostProps> => {
+  const toReturn = {
+    title: 'n/a',
+    path: '/na',
+  };
+
+  const routeConfig = routesConfig.find(({ route }) => route === pathname);
+  if (routeConfig && routeConfig.contentfulTypeId) {
+    const postData: ContentfulApiProject[] = await import(
+      `../../data/${routeConfig.contentfulTypeId}.json`
+    ).then((m) => m.default);
+
+    if (routeConfig.params) {
+      const currentPost = postData.find((item) => {
+        let matchFound = true;
+
+        for (const [pattern, replacerFn] of Object.entries(routeConfig.params)) {
+          matchFound = matchFound && query[pattern] === replacerFn(item);
+        }
+
+        return matchFound;
+      });
+
+      if (currentPost) {
+        toReturn.path = pathname;
+        for (const [pattern, replacerFn] of Object.entries(routeConfig.params)) {
+          toReturn.path = toReturn.path.replace(`[${pattern}]`, replacerFn(currentPost));
+        }
+
+        toReturn.title = currentPost.title;
+      }
+    }
+  }
+
+  return toReturn;
+};
+
+Post.propTypes = {
+  title: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default Post;

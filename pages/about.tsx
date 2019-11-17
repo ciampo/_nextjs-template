@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { NextComponentType } from 'next';
+import { NextComponentType, NextPageContext } from 'next';
 
 import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/Default';
 import PageMeta from '../components/PageMeta';
 import { ContentfulApiAbout } from '../typings';
+import routesConfig from '../routes-config';
 
 type PageAboutProps = {
   title: string;
+  path: string;
 };
 
-const About: NextComponentType<{}, PageAboutProps, PageAboutProps> = ({ title }) => {
+const About: NextComponentType<{}, PageAboutProps, PageAboutProps> = ({ title, path }) => {
   const [exampleState] = useState('Example');
 
   function aboutFullTitle(exampleState: string): string {
@@ -23,7 +25,7 @@ const About: NextComponentType<{}, PageAboutProps, PageAboutProps> = ({ title })
         key="page-meta"
         title={aboutFullTitle(exampleState)}
         description="Sample descripion"
-        path="/"
+        path={path}
       />
 
       <DefaultPageTransitionWrapper>
@@ -33,14 +35,29 @@ const About: NextComponentType<{}, PageAboutProps, PageAboutProps> = ({ title })
   );
 };
 
-About.getInitialProps = async (): Promise<PageAboutProps> => {
-  const about: ContentfulApiAbout[] = await import('../data/about.json').then((m) => m.default);
+About.getInitialProps = async ({ pathname }: NextPageContext): Promise<PageAboutProps> => {
+  const toReturn = {
+    title: 'n/a',
+    path: '/na',
+  };
 
-  return { title: about[0].title };
+  const routeConfig = routesConfig.find(({ route }) => route === pathname);
+
+  if (routeConfig && routeConfig.contentfulTypeId) {
+    const aboutData: ContentfulApiAbout[] = await import(
+      `../data/${routeConfig.contentfulTypeId}.json`
+    ).then((m) => m.default);
+
+    toReturn.title = aboutData[0].title;
+    toReturn.path = pathname;
+  }
+
+  return toReturn;
 };
 
 About.propTypes = {
   title: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default About;
