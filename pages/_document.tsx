@@ -9,41 +9,19 @@ import Document, {
   DocumentProps,
 } from 'next/document';
 
+import { GlobalMetaAPIs } from '../typings';
+
+type CustomDocumentProps = {
+  previewSharingImage: string;
+};
+
 // _document is only rendered on the server side and not on the client side
 // Event handlers like onClick can't be added to this file
 
-interface File {
-  url: string;
-  details: {
-    size: number;
-    image: { width: number; height: number };
-  };
-  fileName: string;
-  contentType: string;
-}
-
-interface Media {
-  fields: {
-    title: string;
-    description?: string;
-    file: File;
-  };
-}
-
-type GlobalMetaAPIs = {
-  previewImage: Media;
-};
-
-interface CustomDocumentInitialProps extends DocumentInitialProps {
-  previewSharingImage: string;
-}
-
-interface CustomDocumentProps extends DocumentProps {
-  previewSharingImage: string;
-}
-
-class CustomDocument extends Document<CustomDocumentProps> {
-  static async getInitialProps(ctx: DocumentContext): Promise<CustomDocumentInitialProps> {
+class CustomDocument extends Document<DocumentProps & CustomDocumentProps> {
+  static async getInitialProps(
+    ctx: DocumentContext
+  ): Promise<DocumentInitialProps & CustomDocumentProps> {
     const initialProps = await Document.getInitialProps(ctx);
 
     const globalMeta: GlobalMetaAPIs[] = await import('../data/globalMeta.json').then(

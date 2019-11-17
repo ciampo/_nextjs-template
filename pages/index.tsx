@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import { NextComponentType } from 'next';
 
 import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/Default';
 import PageMeta from '../components/PageMeta';
@@ -29,7 +30,7 @@ const posts = [
   },
 ];
 
-const Home: React.FC<{}> = () => (
+const Home: NextComponentType<{}, {}, {}> = () => (
   <>
     <PageMeta title="Netx.js modern template" description="Sample descripion" path="/" />
 

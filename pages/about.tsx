@@ -4,18 +4,13 @@ import { NextComponentType } from 'next';
 
 import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/Default';
 import PageMeta from '../components/PageMeta';
+import { ContentfulApiAbout } from '../typings';
 
-type AboutPageProps = {
+type PageAboutProps = {
   title: string;
 };
 
-type AboutAPIs = {
-  title: string;
-  id: string;
-  bio: object;
-};
-
-const About: NextComponentType<{}, {}, AboutPageProps> = ({ title }) => {
+const About: NextComponentType<{}, PageAboutProps, PageAboutProps> = ({ title }) => {
   const [exampleState] = useState('Example');
 
   function aboutFullTitle(exampleState: string): string {
@@ -38,8 +33,8 @@ const About: NextComponentType<{}, {}, AboutPageProps> = ({ title }) => {
   );
 };
 
-About.getInitialProps = async (): Promise<AboutPageProps> => {
-  const about: AboutAPIs[] = await import('../data/about.json').then((m) => m.default);
+About.getInitialProps = async (): Promise<PageAboutProps> => {
+  const about: ContentfulApiAbout[] = await import('../data/about.json').then((m) => m.default);
 
   return { title: about[0].title };
 };

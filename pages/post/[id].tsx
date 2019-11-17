@@ -1,11 +1,11 @@
 import React from 'react';
-
 import { useRouter } from 'next/router';
+import { NextComponentType } from 'next';
 
 import PageMeta from '../../components/PageMeta';
 import DefaultPageTransitionWrapper from '../../components/page-transition-wrappers/Default';
 
-const Post: React.FC<{}> = () => {
+const Post: NextComponentType<{}, {}, {}> = () => {
   const router = useRouter();
 
   return (

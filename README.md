@@ -12,7 +12,7 @@ This is a template for a next.js project using:
 - lint scripts via eslint / prettier / tsc (integrated in next.js build)
 - git hooks (including pre-{commit, push} linting)
 - page transitions (achieved through framer-motion)
-- get contentful data
+- get contentful data (with sample typings)
 - use .env in code
 - ie11 support w/ polyfills
 - google analytics support
@@ -73,10 +73,7 @@ Lints scripts and styles, and tries to auto-fix any errors.
   - use it in sitemap / robots
   - use it in next config
   - use it in each page, in order to get the right JSON data / canonical path
-- use contentful content (e.g. pages)
-- add contentful example models
 - alternative layouts (other than MainLayout)
-- disable initial page animation
 - avoid "dynamic" data disappearing when changing route
 
 ## Nice to have
