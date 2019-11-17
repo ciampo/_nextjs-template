@@ -17,6 +17,15 @@ This is a template for a next.js project using:
 - ie11 support w/ polyfills
 - google analytics support
 - comprehensive meta tags, favicons, webmanifest, preview sharing image
+- sitemap.xml
+- robots.txt
+- enhanced security HTTP headers (including CSP)
+
+## Instructions
+
+- set up Contentful, Netlify and Google Analytics
+- copy `.env.example` and rename it to `env`. Add the correct values for the env variables.
+- add the same env variables to Netlify
 
 ## Main scripts
 
@@ -61,11 +70,14 @@ Lints scripts and styles, and tries to auto-fix any errors.
 ## Coming Soon
 
 - move configuration to a file? associate route with JSON data and page file
+  - use it in sitemap / robots
+  - use it in next config
+  - use it in each page, in order to get the right JSON data / canonical path
 - use contentful content (e.g. pages)
 - add contentful example models
 - alternative layouts (other than MainLayout)
-- CSP
 - disable initial page animation
+- avoid "dynamic" data disappearing when changing route
 
 ## Nice to have
 
