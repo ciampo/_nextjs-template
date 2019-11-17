@@ -74,7 +74,6 @@ Lints scripts and styles, and tries to auto-fix any errors.
   - use it in next config
   - use it in each page, in order to get the right JSON data / canonical path
 - alternative layouts (other than MainLayout)
-- avoid "dynamic" data disappearing when changing route
 
 ## Nice to have
 
