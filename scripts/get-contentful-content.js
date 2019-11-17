@@ -31,16 +31,18 @@ const cleanDataFolder = async () => {
   await mkdirAsync(DATA_FOLDER, { recursive: true });
 };
 
-async function getEntries(type) {
+async function getEntries(type, filterFuntion = () => true) {
   const entries = await client.getEntries({
     // eslint-disable-next-line @typescript-eslint/camelcase
     content_type: type,
   });
 
-  const contents = entries.items.map(({ sys, fields }) => ({
-    id: sys.id,
-    ...fields,
-  }));
+  const contents = entries.items
+    .map(({ sys, fields }) => ({
+      id: sys.id,
+      ...fields,
+    }))
+    .filter(filterFuntion);
 
   await writeFileAsync(path.join(DATA_FOLDER, `${type}.json`), JSON.stringify(contents, null, 2));
 }
@@ -48,6 +50,7 @@ async function getEntries(type) {
 const pullContentfulData = async () => {
   await cleanDataFolder();
   await getEntries('about');
+  await getEntries('project', (projectItem) => projectItem.type === 'personal');
   await getEntries('globalMeta');
 };
 
