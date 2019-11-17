@@ -5,6 +5,11 @@ import { NextComponentType } from 'next';
 
 import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/Default';
 import PageMeta from '../components/PageMeta';
+import { ContentfulApiProject } from '../typings';
+
+type PageHomeProps = {
+  projects: ContentfulApiProject[];
+};
 
 const PostLink: React.FC<{ id: string; label: string }> = ({ id, label }) => (
   <li>
@@ -19,18 +24,7 @@ PostLink.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
-const posts = [
-  {
-    id: 'test-a',
-    label: 'Article A',
-  },
-  {
-    id: 'test-b',
-    label: 'Article B',
-  },
-];
-
-const Home: NextComponentType<{}, {}, {}> = () => (
+const Home: NextComponentType<{}, PageHomeProps, PageHomeProps> = ({ projects }) => (
   <>
     <PageMeta title="Netx.js modern template" description="Sample descripion" path="/" />
 
@@ -42,13 +36,27 @@ const Home: NextComponentType<{}, {}, {}> = () => (
 
       <nav>
         <ul>
-          {posts.map((p) => (
-            <PostLink {...p} key={`home-post-link${p.id}`} />
+          {projects.map((p) => (
+            <PostLink id={p.slug} label={p.title} key={`home-post-link${p.slug}`} />
           ))}
         </ul>
       </nav>
     </DefaultPageTransitionWrapper>
   </>
 );
+
+Home.getInitialProps = async (): Promise<PageHomeProps> => {
+  const projects: ContentfulApiProject[] = await import('../data/project.json').then(
+    (m) => m.default
+  );
+
+  return { projects };
+};
+
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
+// @ts-ignore
+Home.propTypes = {
+  projects: PropTypes.array,
+};
 
 export default Home;
