@@ -15,6 +15,8 @@ This is a template for a next.js project using:
 - get contentful data
 - use .env in code
 - ie11 support w/ polyfills
+- google analytics support
+- comprehensive meta tags, favicons, webmanifest, preview sharing image
 
 ## Main scripts
 
@@ -56,11 +58,14 @@ Lints scripts and styles.
 
 Lints scripts and styles, and tries to auto-fix any errors.
 
-## Future Plans
+## Coming Soon
 
-- add dynamic import module
 - use contentful content (e.g. pages)
 - add contentful example models
-- inline critical styles. It's not supported out of the box, but there may be a few inspirational examples (like [this one](https://github.com/zeit/next.js/pull/3451)). Also, follow [this GH issue](https://github.com/GoogleChromeLabs/critters/issues/44).
 - alternative layouts (other than MainLayout)
 - CSP
+- disable initial page animation
+
+## Nice to have
+
+- inline critical styles. It's not supported out of the box, but there may be a few inspirational examples (like [this one](https://github.com/zeit/next.js/pull/3451)). Also, follow [this GH issue](https://github.com/GoogleChromeLabs/critters/issues/44).

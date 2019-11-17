@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { NextComponentType } from 'next';
-import Head from 'next/head';
 
 import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/default';
+import PageMeta from '../components/PageMeta';
 
 type AboutPageProps = {
   title: string;
@@ -24,9 +24,12 @@ const About: NextComponentType<{}, {}, AboutPageProps> = ({ title }) => {
 
   return (
     <>
-      <Head>
-        <title>{aboutFullTitle(exampleState)}</title>
-      </Head>
+      <PageMeta
+        key="page-meta"
+        title={aboutFullTitle(exampleState)}
+        description="Sample descripion"
+        path="/"
+      />
 
       <DefaultPageTransitionWrapper>
         <div>{aboutFullTitle(exampleState)}</div>

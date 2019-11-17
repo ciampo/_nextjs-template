@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Head from 'next/head';
 import Link from 'next/link';
 
 import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/default';
+import PageMeta from '../components/PageMeta';
 
 const PostLink: React.FC<{ id: string; label: string }> = ({ id, label }) => (
   <li>
@@ -31,10 +31,7 @@ const posts = [
 
 const Home: React.FC<{}> = () => (
   <>
-    <Head>
-      <title>Home</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+    <PageMeta title="Netx.js modern template" description="Sample descripion" path="/" />
 
     <DefaultPageTransitionWrapper>
       <div className="w-full text-gray-700">

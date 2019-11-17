@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NextComponentType, NextPageContext } from 'next';
-import Head from 'next/head';
 
+import PageMeta from '../components/PageMeta';
 import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/default';
 
 type ErrorPageProps = {
@@ -21,11 +21,8 @@ const CustomError: NextComponentType<{}, {}, ErrorPageProps> = ({ statusCode }) 
 
   return (
     <>
-      <Head>
-        <title>
-          {statusCode}: {title}
-        </title>
-      </Head>
+      <PageMeta title={`${statusCode}: ${title}`} description="An error occurred" path="/" />
+
       <DefaultPageTransitionWrapper>
         <header className="flex flex-col items-center justify-center h-40">
           <h1 className="text-gray-900 text-center text-2xl mb-4">{statusCode}</h1>
