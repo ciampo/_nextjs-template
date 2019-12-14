@@ -10,7 +10,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "analyze": "ANALYZE=true next build",
+    "analyze": "ANALYZE=true yarn build",
     "data": "node scripts/get-contentful-content.js",
     "dev": "yarn generate:seo && node server.js",
     "build": "yarn generate:seo && next build",
@@ -22,8 +22,9 @@
     "serve:ssr": "NODE_ENV=production node server.js"
   },
   "browserslist": [
+    "> 1%",
     "last 2 versions",
-    "ie > 10",
+    "Firefox ESR",
     "not dead"
   ],
   "husky": {
@@ -46,11 +47,14 @@
     ]
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^13.4.0",
+    "@contentful/rich-text-types": "^13.4.0",
     "framer-motion": "^1.6.15",
     "next": "^9.1.2",
     "preact": "^10.0.4",
     "react-ga": "^2.7.0",
-    "react-use": "^13.8.0"
+    "react-use": "^13.8.0",
+    "tailwindcss-aspect-ratio": "^2.0.0"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^1.3.0",

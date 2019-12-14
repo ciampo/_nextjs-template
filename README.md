@@ -20,7 +20,7 @@ This is a template for a next.js project. Features:
 - enhanced security `HTTP` headers (including CSP)
 - app structure (w header nav, footer, main and alternative page layout)
 
-## Setup 📝
+## 🛠 Setup
 
 - install `node` glolbally
 - install `yarn` glolbally
@@ -29,7 +29,7 @@ This is a template for a next.js project. Features:
 - add the same env variables to Netlify
 - `yarn install`
 
-## Main scripts ⚙️
+## 📝 Main scripts
 
 ### `yarn dev`
 
@@ -47,7 +47,7 @@ Builds the app in production mode and exports it as static site ready to be host
 
 Serves the static site. The application should be compiled with `yarn static` first.
 
-## Other scripts 🛠
+## 💬 Other scripts
 
 ### `yarn build`
 
@@ -69,14 +69,6 @@ Lints scripts and styles.
 
 Lints scripts and styles, and tries to auto-fix any errors.
 
-## Coming Soon ⌛️
-
-Caught up!
-
-## Nice to have 💭
-
-- inline critical styles. It's not supported out of the box, but there may be a few inspirational examples (like [this one](https://github.com/zeit/next.js/pull/3451)). Also, follow [this GH issue](https://github.com/GoogleChromeLabs/critters/issues/44).
-
-## Contributors
+## 👻 Contributors
 
 - [Marco Ciampini](https://github.com/ciampo)

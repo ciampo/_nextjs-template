@@ -2,24 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { motion } from 'framer-motion';
+import { customEaseOut } from '../utils/utils';
 
 // Inspired from
 // https://reacttricks.com/animating-next-page-transitions-with-framer-motion/
 // and https://github.com/kheruc/rt-next-motion
-const easing = [0.175, 0.85, 0.42, 0.96];
-
 const fadeInTransitionUp = {
   opacity: 1,
   y: 0,
-  transition: { duration: 0.6, delay: 0.2, ease: easing },
+  transition: { duration: 0.6, delay: 0.2, ease: customEaseOut },
 };
 const fadeOutTransitionDown = {
   opacity: 0,
-  y: 100,
-  transition: { duration: 0.6, delay: 0.1, ease: easing },
+  y: 60,
+  transition: { duration: 0.6, delay: 0.1, ease: customEaseOut },
 };
 
-const DefaultPageTransitionWrapper: React.FC<{}> = ({ children }) => (
+type CustomPageTransitionProps = React.PropsWithChildren<{
+  onComplete?: () => void;
+}>;
+
+const DefaultPageTransitionWrapper: React.FC<CustomPageTransitionProps> = ({
+  children,
+  onComplete,
+}) => (
   <motion.div
     initial="exit"
     animate="enter"
@@ -28,6 +34,7 @@ const DefaultPageTransitionWrapper: React.FC<{}> = ({ children }) => (
       enter: fadeInTransitionUp,
       exit: fadeOutTransitionDown,
     }}
+    onAnimationComplete={onComplete}
   >
     {children}
   </motion.div>
@@ -35,6 +42,7 @@ const DefaultPageTransitionWrapper: React.FC<{}> = ({ children }) => (
 
 DefaultPageTransitionWrapper.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+  onComplete: PropTypes.func,
 };
 
 export default DefaultPageTransitionWrapper;

@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import PropTypes from 'prop-types';
 
 import Nav from '../Nav';
-import Footer from '../Footer';
+import { UiLink } from '../../typings';
 
-const MainLayout: React.FC<{}> = ({ children }) => (
+type MainLayoutProps = PropsWithChildren<{
+  navLinks: UiLink[];
+}>;
+
+const MainLayout: React.FC<MainLayoutProps> = ({ children, navLinks }) => (
   <>
-    <Nav />
+    <Nav links={navLinks} />
 
-    <main className="w-full min-h-screen pt-16 pb-12">{children}</main>
+    <main className="w-full">{children}</main>
 
-    <Footer />
+    {/* <Footer /> */}
   </>
 );
 
 MainLayout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+  navLinks: PropTypes.array.isRequired,
 };
 
 export default MainLayout;

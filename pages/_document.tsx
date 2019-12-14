@@ -24,12 +24,12 @@ class CustomDocument extends Document<DocumentProps & CustomDocumentProps> {
   ): Promise<DocumentInitialProps & CustomDocumentProps> {
     const initialProps = await Document.getInitialProps(ctx);
 
-    const globalMeta: ContentfulApiGlobalMeta[] = await import('../data/globalMeta.json').then(
+    const globalMeta: ContentfulApiGlobalMeta = await import('../data/global-meta.json').then(
       (m) => m.default
     );
 
     return {
-      previewSharingImage: globalMeta[0].previewImage.fields.file.url,
+      previewSharingImage: globalMeta.previewImage.file.url,
       ...initialProps,
     };
   }
@@ -50,7 +50,7 @@ class CustomDocument extends Document<DocumentProps & CustomDocumentProps> {
           <meta name="msapplication-config" content="/browserconfig.xml" />
 
           {/* Icons & theme colors */}
-          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
           <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
