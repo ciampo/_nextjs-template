@@ -23,6 +23,7 @@ public/robots.txt
 # misc
 .DS_Store
 .env
+.code-workspace
 
 # debug
 npm-debug.log*
