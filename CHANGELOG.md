@@ -39,6 +39,17 @@ for any bug fixes.
 in case of vulnerabilities.
 -->
 
+## [1.2.1] - 2019-12-28
+
+### Removed
+
+- Removed all PropTypes (see release [1.2.0])
+
+### Fixed
+
+- Allow contentful images and videos in img/media CSP rules
+- eslintrc indentation
+
 ## [1.2.0] - 2019-12-28
 
 ### Added
@@ -89,7 +100,8 @@ in case of vulnerabilities.
 
 - Next.js template project MVP
 
-[Unreleased]: https://github.com/ciampo/_nextjs-template/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/ciampo/_nextjs-template/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/ciampo/_nextjs-template/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/ciampo/_nextjs-template/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/ciampo/_nextjs-template/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/ciampo/_nextjs-template/releases/tag/v1.0.0
