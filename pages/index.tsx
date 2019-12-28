@@ -5,7 +5,12 @@ import Link from 'next/link';
 
 import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/Default';
 import PageMeta from '../components/PageMeta';
-import { ContentfulApiPageHome, ContentfulApiProject } from '../typings';
+import { generateWebpageStructuredData } from '../components/utils/structured-data';
+import {
+  ContentfulApiPageHome,
+  ContentfulApiProject,
+  ContentfulApiStructuredData,
+} from '../typings';
 import routesConfig from '../routes-config';
 
 type PageHomeProps = ContentfulApiPageHome & {
@@ -26,9 +31,26 @@ PostLink.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
-const Home: NextComponentType<{}, PageHomeProps, PageHomeProps> = ({ path, meta, projects }) => (
+const Home: NextComponentType<{}, PageHomeProps, PageHomeProps> = ({
+  path,
+  meta,
+  projects,
+  structuredDataTemplate,
+}) => (
   <>
-    <PageMeta title={meta.title} description={meta.description} path={path} />
+    <PageMeta
+      title={meta.title}
+      description={meta.description}
+      previewImage={meta.previewImage.file.url}
+      path={path}
+      webPageStructuredData={
+        structuredDataTemplate &&
+        generateWebpageStructuredData(structuredDataTemplate, {
+          title: meta.title,
+          description: meta.description,
+        })
+      }
+    />
 
     <DefaultPageTransitionWrapper>
       <section className="pt-24 pb-12 md:pt-32 md:pb-16 lg:pt-48 container mx-auto">
@@ -50,14 +72,26 @@ const Home: NextComponentType<{}, PageHomeProps, PageHomeProps> = ({ path, meta,
 );
 
 Home.getInitialProps = async ({ pathname }: NextPageContext): Promise<PageHomeProps> => {
-  const toReturn = {
+  const toReturn: PageHomeProps = {
     path: '/na',
     pageTitle: 'Home',
     meta: {
       title: 'Home',
       description: 'Home page',
+      previewImage: {
+        title: '',
+        file: {
+          url: '',
+          contentType: '',
+          fileName: '',
+          details: {
+            size: -1,
+          },
+        },
+      },
     },
     projects: [] as ContentfulApiProject[],
+    structuredDataTemplate: undefined,
   };
 
   const routeConfig = routesConfig.find(({ route }) => route === pathname);
@@ -72,11 +106,17 @@ Home.getInitialProps = async ({ pathname }: NextPageContext): Promise<PageHomePr
     toReturn.meta = homeData.meta;
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
   const projects: ContentfulApiProject[] = await import('../data/personal-projects.json').then(
     (m) => m.default
   );
-
   toReturn.projects = projects;
+
+  const structuredDataTemplate: ContentfulApiStructuredData = await import(
+    `../data/structured-data-template.json`
+  ).then((m) => m.default);
+  toReturn.structuredDataTemplate = structuredDataTemplate as ContentfulApiStructuredData;
 
   return toReturn;
 };
@@ -86,9 +126,27 @@ Home.propTypes = {
   meta: PropTypes.shape({
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    previewImage: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string,
+      file: PropTypes.shape({
+        url: PropTypes.string.isRequired,
+        fileName: PropTypes.string.isRequired,
+        contentType: PropTypes.string.isRequired,
+        __base64Thumb: PropTypes.string,
+        details: PropTypes.shape({
+          size: PropTypes.number.isRequired,
+          image: PropTypes.shape({
+            width: PropTypes.number.isRequired,
+            height: PropTypes.number.isRequired,
+          }),
+        }).isRequired,
+      }).isRequired,
+    }).isRequired,
   }).isRequired,
   pageTitle: PropTypes.string.isRequired,
   projects: PropTypes.array.isRequired,
+  structuredDataTemplate: PropTypes.any,
 };
 
 export default Home;

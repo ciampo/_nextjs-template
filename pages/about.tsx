@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NextComponentType, NextPageContext } from 'next';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/Default';
 import PageMeta from '../components/PageMeta';
-import { ContentfulApiPageAbout } from '../typings';
+import RichTextRenderer from '../components/utils/RichTextRenderer';
+import { generateWebpageStructuredData } from '../components/utils/structured-data';
+import { ContentfulApiPageAbout, ContentfulApiStructuredData } from '../typings';
 import routesConfig from '../routes-config';
 
 type PageAboutProps = ContentfulApiPageAbout & {
@@ -17,10 +18,24 @@ const About: NextComponentType<{}, PageAboutProps, PageAboutProps> = ({
   path,
   title,
   bio,
+  structuredDataTemplate,
 }) => {
   return (
     <>
-      <PageMeta key="page-meta" title={meta.title} description={meta.description} path={path} />
+      <PageMeta
+        key="page-meta"
+        title={meta.title}
+        description={meta.description}
+        previewImage={meta.previewImage.file.url}
+        path={path}
+        webPageStructuredData={
+          structuredDataTemplate &&
+          generateWebpageStructuredData(structuredDataTemplate, {
+            title: meta.title,
+            description: meta.description,
+          })
+        }
+      />
 
       <DefaultPageTransitionWrapper>
         <section className="pt-24 pb-12 md:pt-32 md:pb-16 lg:pt-48 container mx-auto">
@@ -28,7 +43,9 @@ const About: NextComponentType<{}, PageAboutProps, PageAboutProps> = ({
 
           {/* Bio */}
           {bio && (
-            <div className="lg:flex-1 rich-text-container">{documentToReactComponents(bio)}</div>
+            <div className="lg:flex-1 rich-text-container">
+              <RichTextRenderer richText={bio} />
+            </div>
           )}
         </section>
       </DefaultPageTransitionWrapper>
@@ -43,6 +60,18 @@ About.getInitialProps = async ({ pathname }: NextPageContext): Promise<PageAbout
     meta: {
       title: 'About',
       description: 'About page',
+      previewImage: {
+        title: '',
+        file: {
+          url: '',
+          contentType: '',
+          fileName: '',
+          __base64Thumb: '',
+          details: {
+            size: -1,
+          },
+        },
+      },
     },
     bio: undefined,
   };
@@ -60,6 +89,11 @@ About.getInitialProps = async ({ pathname }: NextPageContext): Promise<PageAbout
     toReturn.bio = aboutData.bio;
   }
 
+  const structuredDataTemplate: ContentfulApiStructuredData = await import(
+    `../data/structured-data-template.json`
+  ).then((m) => m.default);
+  toReturn.structuredDataTemplate = structuredDataTemplate;
+
   return toReturn;
 };
 
@@ -68,10 +102,28 @@ About.propTypes = {
   meta: PropTypes.shape({
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    previewImage: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string,
+      file: PropTypes.shape({
+        url: PropTypes.string.isRequired,
+        fileName: PropTypes.string.isRequired,
+        contentType: PropTypes.string.isRequired,
+        __base64Thumb: PropTypes.string,
+        details: PropTypes.shape({
+          size: PropTypes.number.isRequired,
+          image: PropTypes.shape({
+            width: PropTypes.number.isRequired,
+            height: PropTypes.number.isRequired,
+          }),
+        }).isRequired,
+      }).isRequired,
+    }).isRequired,
   }).isRequired,
   title: PropTypes.string.isRequired,
   // using 'any' avoids strange incompatibilities with Typescript type
   bio: PropTypes.any,
+  structuredDataTemplate: PropTypes.any,
 };
 
 export default About;

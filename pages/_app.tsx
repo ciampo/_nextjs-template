@@ -1,6 +1,6 @@
 import '../styles/index.css';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import App, { AppContext, AppInitialProps } from 'next/app';
 import { AnimatePresence } from 'framer-motion';
 
@@ -46,20 +46,20 @@ export default class MyApp extends App<CustomAppProps> {
     }
   }
 
+  componentDidMount(): void {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }
+
+  componentWillUnmount(): void {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'auto';
+    }
+  }
+
   render(): JSX.Element {
     const { Component, pageProps, router, navLinks } = this.props;
-
-    useEffect(() => {
-      if ('scrollRestoration' in window.history) {
-        window.history.scrollRestoration = 'manual';
-      }
-
-      return (): void => {
-        if ('scrollRestoration' in window.history) {
-          window.history.scrollRestoration = 'auto';
-        }
-      };
-    }, []);
 
     return (
       <>
