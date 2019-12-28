@@ -1,11 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { NextComponentType, NextPageContext } from 'next';
 
 import PageMeta from '../../components/PageMeta';
 import ContentfulImage from '../../components/media/image';
 import ContentfulVideo from '../../components/media/video';
 import DefaultPageTransitionWrapper from '../../components/page-transition-wrappers/Default';
+import { initialDefaultPageProps } from '../../components/utils/initial-props';
+
 import {
   ContentfulApiPageProject,
   ContentfulApiProject,
@@ -125,26 +126,10 @@ const Post: NextComponentType<{}, PagePostProps, PagePostProps> = ({
 
 Post.getInitialProps = async ({ pathname, query }: NextPageContext): Promise<PagePostProps> => {
   const toReturn: PagePostProps = {
+    ...initialDefaultPageProps,
     path: 'N/A',
     mediaSectionTitle: 'Media',
-    meta: {
-      title: 'Project',
-      description: 'Project',
-      previewImage: {
-        title: '',
-        file: {
-          url: '',
-          contentType: '',
-          fileName: '',
-          __base64Thumb: '',
-          details: {
-            size: -1,
-          },
-        },
-      },
-    },
     project: undefined,
-    structuredDataTemplate: undefined,
     parentPage: undefined,
   };
 
@@ -217,38 +202,6 @@ Post.getInitialProps = async ({ pathname, query }: NextPageContext): Promise<Pag
   }
 
   return toReturn;
-};
-
-Post.propTypes = {
-  path: PropTypes.string.isRequired,
-  meta: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    previewImage: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      file: PropTypes.shape({
-        url: PropTypes.string.isRequired,
-        fileName: PropTypes.string.isRequired,
-        contentType: PropTypes.string.isRequired,
-        __base64Thumb: PropTypes.string,
-        details: PropTypes.shape({
-          size: PropTypes.number.isRequired,
-          image: PropTypes.shape({
-            width: PropTypes.number.isRequired,
-            height: PropTypes.number.isRequired,
-          }),
-        }).isRequired,
-      }).isRequired,
-    }).isRequired,
-  }).isRequired,
-  mediaSectionTitle: PropTypes.string.isRequired,
-  project: PropTypes.any,
-  structuredDataTemplate: PropTypes.any,
-  parentPage: PropTypes.shape({
-    path: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  }),
 };
 
 export default Post;

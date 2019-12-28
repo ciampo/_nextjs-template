@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { NextComponentType, NextPageContext } from 'next';
 
 import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/Default';
 import PageMeta from '../components/PageMeta';
 import RichTextRenderer from '../components/utils/RichTextRenderer';
 import { generateWebpageStructuredData } from '../components/utils/structured-data';
+import { initialDefaultPageProps } from '../components/utils/initial-props';
 import { ContentfulApiPageAbout, ContentfulApiStructuredData } from '../typings';
 import routesConfig from '../routes-config';
 
@@ -55,24 +55,9 @@ const About: NextComponentType<{}, PageAboutProps, PageAboutProps> = ({
 
 About.getInitialProps = async ({ pathname }: NextPageContext): Promise<PageAboutProps> => {
   const toReturn: PageAboutProps = {
+    ...initialDefaultPageProps,
     path: '/na',
     title: 'About me',
-    meta: {
-      title: 'About',
-      description: 'About page',
-      previewImage: {
-        title: '',
-        file: {
-          url: '',
-          contentType: '',
-          fileName: '',
-          __base64Thumb: '',
-          details: {
-            size: -1,
-          },
-        },
-      },
-    },
     bio: undefined,
   };
 
@@ -95,35 +80,6 @@ About.getInitialProps = async ({ pathname }: NextPageContext): Promise<PageAbout
   toReturn.structuredDataTemplate = structuredDataTemplate;
 
   return toReturn;
-};
-
-About.propTypes = {
-  path: PropTypes.string.isRequired,
-  meta: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    previewImage: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      file: PropTypes.shape({
-        url: PropTypes.string.isRequired,
-        fileName: PropTypes.string.isRequired,
-        contentType: PropTypes.string.isRequired,
-        __base64Thumb: PropTypes.string,
-        details: PropTypes.shape({
-          size: PropTypes.number.isRequired,
-          image: PropTypes.shape({
-            width: PropTypes.number.isRequired,
-            height: PropTypes.number.isRequired,
-          }),
-        }).isRequired,
-      }).isRequired,
-    }).isRequired,
-  }).isRequired,
-  title: PropTypes.string.isRequired,
-  // using 'any' avoids strange incompatibilities with Typescript type
-  bio: PropTypes.any,
-  structuredDataTemplate: PropTypes.any,
 };
 
 export default About;

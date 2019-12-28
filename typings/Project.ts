@@ -11,7 +11,7 @@ export type ContentfulApiProject = {
   client: string;
   url: string;
   date: string;
-  description: Document;
+  description?: Document;
   widePictures?: {
     source: ContentfulMedia;
   }[];

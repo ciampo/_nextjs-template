@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { NextComponentType, NextPageContext } from 'next';
 import Link from 'next/link';
 
 import DefaultPageTransitionWrapper from '../components/page-transition-wrappers/Default';
 import PageMeta from '../components/PageMeta';
 import { generateWebpageStructuredData } from '../components/utils/structured-data';
+import { initialDefaultPageProps } from '../components/utils/initial-props';
 import {
   ContentfulApiPageHome,
   ContentfulApiProject,
@@ -25,11 +25,6 @@ const PostLink: React.FC<{ id: string; label: string }> = ({ id, label }) => (
     </Link>
   </li>
 );
-
-PostLink.propTypes = {
-  id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-};
 
 const Home: NextComponentType<{}, PageHomeProps, PageHomeProps> = ({
   path,
@@ -73,25 +68,10 @@ const Home: NextComponentType<{}, PageHomeProps, PageHomeProps> = ({
 
 Home.getInitialProps = async ({ pathname }: NextPageContext): Promise<PageHomeProps> => {
   const toReturn: PageHomeProps = {
-    path: '/na',
-    pageTitle: 'Home',
-    meta: {
-      title: 'Home',
-      description: 'Home page',
-      previewImage: {
-        title: '',
-        file: {
-          url: '',
-          contentType: '',
-          fileName: '',
-          details: {
-            size: -1,
-          },
-        },
-      },
-    },
+    ...initialDefaultPageProps,
+    pageTitle: 'Home Page',
+    path: '/',
     projects: [] as ContentfulApiProject[],
-    structuredDataTemplate: undefined,
   };
 
   const routeConfig = routesConfig.find(({ route }) => route === pathname);
@@ -119,34 +99,6 @@ Home.getInitialProps = async ({ pathname }: NextPageContext): Promise<PageHomePr
   toReturn.structuredDataTemplate = structuredDataTemplate as ContentfulApiStructuredData;
 
   return toReturn;
-};
-
-Home.propTypes = {
-  path: PropTypes.string.isRequired,
-  meta: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    previewImage: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      file: PropTypes.shape({
-        url: PropTypes.string.isRequired,
-        fileName: PropTypes.string.isRequired,
-        contentType: PropTypes.string.isRequired,
-        __base64Thumb: PropTypes.string,
-        details: PropTypes.shape({
-          size: PropTypes.number.isRequired,
-          image: PropTypes.shape({
-            width: PropTypes.number.isRequired,
-            height: PropTypes.number.isRequired,
-          }),
-        }).isRequired,
-      }).isRequired,
-    }).isRequired,
-  }).isRequired,
-  pageTitle: PropTypes.string.isRequired,
-  projects: PropTypes.array.isRequired,
-  structuredDataTemplate: PropTypes.any,
 };
 
 export default Home;
